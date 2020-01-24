@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <math.h>
+
+#define RAIZ(x) ((x)+2)
+
+int main() {
+float xl, xu, xr, xa, ea;
+int iteraciones;
+printf("dame xl:\n ");
+scanf("%f", &xl);
+printf("dame xu:\n ");
+scanf("%f", &xu);
+
+iteraciones = 0;
+xa = 0.0;
+ea = 0;
+printf("%12s %10s %10s %10s %10s\n", "Iteraciones", "Xl", "Xu", "Xr", "Ea");
+
+do{
+iteraciones++;
+xr = (xl + xu) / 2;
+if(iteraciones >= 2) {
+ea = ((xr - xa) / xr) * 100;
+}
+ea = fabs(ea);
+printf("%12d %10f %10f %10f %10f\n", iteraciones, xl, xu, xr, fabs(ea));
+xa = xr;
+if(RAIZ(xr) > 0) {
+xl = xr;
+} else{
+xu = xr;
+}
+
+} while(ea > 0.5 || (ea == 0.0 && iteraciones == 1));
+
+printf("\nLa raiz es de f(x) = x + 2; es: %f\n", xr);
+
+return 0;
+}
